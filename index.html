@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#14110F">
+<meta name="description" content="BODA BLITZ — Race Through Kampala! A board game of boda boda riders racing across Kampala.">
+<title>BODA BLITZ — Race Through Kampala!</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="app">
+
+  <!-- ============ HOME ============ -->
+  <section class="screen active" id="screen-home">
+    <div class="home-inner">
+      <div class="logo-wrap">
+        <div class="logo-strip"></div>
+        <h1 class="logo">BODA<span>BLITZ</span></h1>
+        <p class="tagline">RACE THROUGH KAMPALA!</p>
+        <div class="logo-bike" aria-hidden="true">🏍️</div>
+      </div>
+
+      <nav class="menu">
+        <button class="btn btn-primary btn-lg" data-action="play-local">▶ PLAY NOW</button>
+        <button class="btn btn-secondary" data-action="play-practice">🤖 PRACTICE MODE</button>
+        <button class="btn btn-secondary" data-action="play-online">🌐 ONLINE MULTIPLAYER</button>
+        <div class="menu-row">
+          <button class="btn btn-ghost" data-action="howto">How to Play</button>
+          <button class="btn btn-ghost" data-action="rules">Game Rules</button>
+        </div>
+        <div class="menu-row">
+          <button class="btn btn-ghost" data-action="settings">⚙ Settings</button>
+          <button class="btn btn-ghost" data-action="about">About</button>
+        </div>
+      </nav>
+      <p class="version">v1.0 · Made for Kampala 🇺🇬</p>
+    </div>
+  </section>
+
+  <!-- ============ PLAYER SETUP ============ -->
+  <section class="screen" id="screen-setup">
+    <header class="topbar">
+      <button class="btn-icon" data-action="home" aria-label="Back to menu">←</button>
+      <h2 id="setup-title">Player Setup</h2>
+      <span class="topbar-spacer"></span>
+    </header>
+
+    <div class="setup-body">
+      <div class="field">
+        <span class="field-label" id="count-label">Number of players</span>
+        <div class="seg" id="count-seg" role="group" aria-labelledby="count-label"></div>
+      </div>
+
+      <div id="player-rows" class="player-rows"></div>
+
+      <p class="hint" id="setup-hint"></p>
+
+      <div class="row-actions">
+        <button class="btn btn-ghost" data-action="home">Back</button>
+        <button class="btn btn-primary" id="btn-start-game">START RACE 🏁</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ GAME ============ -->
+  <section class="screen" id="screen-game">
+    <header class="topbar">
+      <button class="btn-icon" data-action="quit-game" aria-label="Quit game">←</button>
+      <div class="turn-badge" id="turn-badge">—</div>
+      <button class="btn-icon" data-action="settings" aria-label="Settings">⚙</button>
+    </header>
+
+    <div class="game-layout">
+      <div class="board-wrap">
+        <div id="board" class="board" role="grid" aria-label="BODA BLITZ game board"></div>
+      </div>
+
+      <aside class="sidebar">
+        <div class="dice-panel">
+          <div class="die" id="die" aria-live="polite">–</div>
+          <button class="btn btn-primary btn-roll" id="btn-roll">ROLL DICE</button>
+          <p class="dice-hint" id="dice-hint">Red Rider's turn</p>
+        </div>
+
+        <div class="panel">
+          <h3 class="panel-title">Riders</h3>
+          <div id="players-panel" class="players-panel"></div>
+        </div>
+
+        <div class="panel panel-log">
+          <h3 class="panel-title">Race Log</h3>
+          <ul id="game-log" class="log-list"></ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ============ HOW TO PLAY ============ -->
+  <section class="screen" id="screen-howto">
+    <header class="topbar">
+      <button class="btn-icon" data-action="home" aria-label="Back">←</button>
+      <h2>How to Play</h2><span class="topbar-spacer"></span>
+    </header>
+    <div class="doc">
+      <ol class="steps">
+        <li><strong>Pick your riders.</strong> Choose 2–4 players and give each one a colour.</li>
+        <li><strong>Roll the dice.</strong> Tap <em>ROLL DICE</em> on your turn and ride that many squares.</li>
+        <li><strong>Handle the road.</strong> Markets give coins, potholes push you back, police checks cost you.</li>
+        <li><strong>Land exactly on FINISH.</strong> Overshooting means you stay put and wait for a better roll.</li>
+        <li><strong>Win the race.</strong> First rider to reach Parliament Square wins BODA BLITZ!</li>
+      </ol>
+      <p class="note">Tip: on a phone, play in landscape or scroll the board area — everything still works.</p>
+    </div>
+  </section>
+
+  <!-- ============ RULES ============ -->
+  <section class="screen" id="screen-rules">
+    <header class="topbar">
+      <button class="btn-icon" data-action="home" aria-label="Back">←</button>
+      <h2>Game Rules</h2><span class="topbar-spacer"></span>
+    </header>
+    <div class="doc">
+      <table class="rules-table">
+        <thead><tr><th>Square</th><th>Effect</th></tr></thead>
+        <tbody>
+          <tr><td>🚧 Traffic Jam</td><td>Lose your next turn</td></tr>
+          <tr><td>🕳 Pothole</td><td>Move back 2 spaces</td></tr>
+          <tr><td>⛽ Fuel Station</td><td>Move forward 2 spaces</td></tr>
+          <tr><td>🚔 Police Check</td><td>Pay 2 coins or lose your next turn</td></tr>
+          <tr><td>🛒 Market</td><td>Collect 2 coins</td></tr>
+          <tr><td>🟢 Safe Lane</td><td>No effect (draws a bonus card if enabled)</td></tr>
+          <tr><td>⚡ Shortcut</td><td>Move forward 3 spaces</td></tr>
+          <tr><td>🔄 City Roundabout</td><td>Roll again</td></tr>
+          <tr><td>🏍 Boda Boost</td><td>Move forward 1 space</td></tr>
+        </tbody>
+      </table>
+      <ul class="bullets">
+        <li>All riders start at position 0 (Owino Market).</li>
+        <li>You must land <strong>exactly</strong> on FINISH (position 41).</li>
+        <li>Special squares never chain: a square reached by a special effect does nothing.</li>
+        <li>Coins are game points only — they are not real money.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ SETTINGS ============ -->
+  <section class="screen" id="screen-settings">
+    <header class="topbar">
+      <button class="btn-icon" id="btn-settings-back" aria-label="Back">←</button>
+      <h2>Settings</h2><span class="topbar-spacer"></span>
+    </header>
+    <div class="doc">
+      <div class="setting"><span>Sound effects</span><input type="checkbox" id="set-sound" class="switch"></div>
+      <div class="setting"><span>Background music</span><input type="checkbox" id="set-music" class="switch"></div>
+      <div class="setting"><span>Animations</span><input type="checkbox" id="set-anim" class="switch"></div>
+      <div class="setting"><span>Reduced motion</span><input type="checkbox" id="set-reduced" class="switch"></div>
+      <div class="setting"><span>Bonus cards on Safe Lanes</span><input type="checkbox" id="set-cards" class="switch"></div>
+
+      <h3 class="panel-title" style="margin-top:22px">Local Statistics</h3>
+      <p class="stats-line" id="stats-line">No races played yet.</p>
+      <button class="btn btn-ghost" id="btn-reset-stats">Reset statistics</button>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section class="screen" id="screen-about">
+    <header class="topbar">
+      <button class="btn-icon" data-action="home" aria-label="Back">←</button>
+      <h2>About</h2><span class="topbar-spacer"></span>
+    </header>
+    <div class="doc">
+      <p><strong>BODA BLITZ — Race Through Kampala!</strong> is a free browser board game inspired by Kampala's boda boda culture, its markets, its potholes and its traffic.</p>
+      <p>Built with HTML5, CSS3 and vanilla JavaScript. A Python/Flask backend is included for future online multiplayer.</p>
+      <p class="note">Coins in this game are virtual points. No real money is involved.</p>
+    </div>
+  </section>
+
+  <!-- ============ MODAL / OVERLAY ============ -->
+  <div class="modal-backdrop" id="modal-backdrop" hidden>
+    <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"></div>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+</div>
+
+<script src="js/storage.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/board.js"></script>
+<script src="js/cards.js"></script>
+<script src="js/players.js"></script>
+<script src="js/game.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
